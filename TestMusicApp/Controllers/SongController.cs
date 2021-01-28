@@ -48,7 +48,7 @@ namespace TestMusicApp.Controllers
 
         public IQueryable<Song> SongsByGroupName(string GroupName) {
             return (from songs in MusicGroupsDBContext.Songs
-                    where songs.Group.GroupName == GroupName
+                    where songs.SongGroupFkNavigation.GroupName == GroupName
                     select songs);
         }
 

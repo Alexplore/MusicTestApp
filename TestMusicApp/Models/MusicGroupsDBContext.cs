@@ -15,7 +15,6 @@ namespace TestMusicApp
         public MusicGroupsDBContext(DbContextOptions<MusicGroupsDBContext> options)
             : base(options)
         {
-            
         }
 
         public virtual DbSet<Group> Groups { get; set; }
@@ -25,7 +24,7 @@ namespace TestMusicApp
         {
             if (!optionsBuilder.IsConfigured)
             {
-               optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=MusicGroupsDB;Trusted_Connection=True;");
+              optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=MusicGroupsDB;Trusted_Connection=True;");
             }
         }
 
@@ -52,6 +51,8 @@ namespace TestMusicApp
             {
                 entity.ToTable("Song");
 
+                entity.Property(e => e.SongGroupFk).HasColumnName("Song_Group_FK");
+
                 entity.Property(e => e.SongName)
                     .IsRequired()
                     .HasMaxLength(20)
@@ -59,9 +60,10 @@ namespace TestMusicApp
 
                 entity.Property(e => e.SongText).HasColumnType("text");
 
-                entity.HasOne(d => d.Group)
+                entity.HasOne(d => d.SongGroupFkNavigation)
                     .WithMany(p => p.Songs)
-                    .HasForeignKey(d => d.GroupId)
+                    .HasForeignKey(d => d.SongGroupFk)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Song_Group");
             });
 

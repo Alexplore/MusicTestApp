@@ -7,13 +7,15 @@ namespace TestMusicApp
 {
     public partial class Group
     {
-        public Group(string GroupName, string GroupGenre)
+        public Group()
         {
             Songs = new HashSet<Song>();
+        }
+        public Group(string GroupName, string GroupGenre)
+        {
             this.GroupName = GroupName;
             this.GroupGenre = GroupGenre;
         }
-
         public int GroupId { get; set; }
         public string GroupName { get; set; }
         public string GroupGenre { get; set; }
