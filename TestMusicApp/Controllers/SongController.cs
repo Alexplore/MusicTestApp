@@ -14,12 +14,12 @@ namespace TestMusicApp.Controllers
         {
             this.MusicGroupsDBContext = MusicGroupsDBContext;
         }
-        public Song FindById(int Id)
+        public Song FindById(int id)
         {
-            Song Song = ((Song)(from songs in MusicGroupsDBContext.Songs
-                                   where songs.SongId == Id
-                                   select songs));
-            return Song;
+            Song song = (from songs in MusicGroupsDBContext.Songs
+                                   where songs.SongId == id
+                                   select songs).First();
+            return song;
         }
 
         public IQueryable<Song> ReadSongs()
@@ -28,27 +28,27 @@ namespace TestMusicApp.Controllers
                     select songs);
         }
 
-        public void CreateSong(Song Song)
+        public void CreateSong(Song song)
         {
-            MusicGroupsDBContext.Add(Song);
+            MusicGroupsDBContext.Add(song);
             MusicGroupsDBContext.SaveChanges();
         }
 
-        public void DeleteSong(Song Song)
+        public void DeleteSong(Song song)
         {
-            MusicGroupsDBContext.Remove(Song);
+            MusicGroupsDBContext.Remove(song);
             MusicGroupsDBContext.SaveChanges();
         }
 
-        public void UpdateSong(Song Song)
+        public void UpdateSong(Song song)
         {
-            MusicGroupsDBContext.Update(Song);
+            MusicGroupsDBContext.Update(song);
             MusicGroupsDBContext.SaveChanges();
         }
 
-        public IQueryable<Song> SongsByGroupName(string GroupName) {
+        public IQueryable<Song> SongsByGroupName(string groupName) {
             return (from songs in MusicGroupsDBContext.Songs
-                    where songs.SongGroupFkNavigation.GroupName == GroupName
+                    where songs.SongGroupFkNavigation.GroupName == groupName
                     select songs);
         }
 

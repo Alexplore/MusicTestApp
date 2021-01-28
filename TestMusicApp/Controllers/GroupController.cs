@@ -12,12 +12,12 @@ namespace TestMusicApp.Controllers
         public GroupController(MusicGroupsDBContext MusicGroupsDBContext) {
             this.MusicGroupsDBContext = MusicGroupsDBContext;
         }
-        public Group FindById(int Id)
+        public Group FindById(int id)
         {
-            Group Group = ((Group)(from groups in MusicGroupsDBContext.Groups
-                           where groups.GroupId == Id
-                           select groups));
-            return  Group;
+            Group group = (from groups in MusicGroupsDBContext.Groups
+                           where groups.GroupId == id
+                           select groups).First();
+            return group;
         }
 
         public IQueryable<Group> ReadGroups()
@@ -26,20 +26,20 @@ namespace TestMusicApp.Controllers
                             select groups);
         }
 
-        public void CreateGroup(Group Group) {
-            MusicGroupsDBContext.Add(Group);
+        public void CreateGroup(Group group) {
+            MusicGroupsDBContext.Add(group);
             MusicGroupsDBContext.SaveChanges();
         }
 
-        public void DeleteGroup(Group Group)
+        public void DeleteGroup(Group group)
         {
-            MusicGroupsDBContext.Remove(Group);
+            MusicGroupsDBContext.Remove(group);
             MusicGroupsDBContext.SaveChanges();
         }
 
-        public void UpdateGroup(Group Group)
+        public void UpdateGroup(Group group)
         {
-            MusicGroupsDBContext.Update(Group);
+            MusicGroupsDBContext.Update(group);
             MusicGroupsDBContext.SaveChanges();
         }
 
