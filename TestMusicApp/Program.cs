@@ -71,8 +71,7 @@ namespace TestMusicApp
                             name = Console.ReadLine();
                             Console.WriteLine("Genre:");
                             genre = Console.ReadLine();
-                            newGroup = new Group(name, genre);
-                            groupController.UpdateGroup(newGroup);
+                            groupController.UpdateGroup(id, name, genre);
                             break;
                         case 6://Creating a new song
                             Console.WriteLine("Enter data of new song\n" +
@@ -101,9 +100,8 @@ namespace TestMusicApp
                                 $"Enter new Name:");
                             name = Console.ReadLine();
                             Console.WriteLine("Id of a group:");
-                            id = Convert.ToInt32(Console.ReadLine());
-                            newSong = new Song(name, id);
-                            songController.UpdateSong(newSong);
+                            groupId = Convert.ToInt32(Console.ReadLine());
+                            songController.UpdateSong(id, name, groupId);
                             break;
                         case 9:
                             Console.WriteLine("Enter name of group:");

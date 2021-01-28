@@ -27,20 +27,32 @@ namespace TestMusicApp.Controllers
         }
 
         public void CreateGroup(Group group) {
-            MusicGroupsDBContext.Add(group);
-            MusicGroupsDBContext.SaveChanges();
+            if (group != null)
+            {
+                MusicGroupsDBContext.Add(group);
+                MusicGroupsDBContext.SaveChanges();
+            }
         }
 
         public void DeleteGroup(Group group)
         {
-            MusicGroupsDBContext.Remove(group);
-            MusicGroupsDBContext.SaveChanges();
+            if (group != null)
+            {
+                MusicGroupsDBContext.Remove(group);
+                MusicGroupsDBContext.SaveChanges();
+            }
         }
 
-        public void UpdateGroup(Group group)
+        public void UpdateGroup(int id, string name, string genre)
         {
-            MusicGroupsDBContext.Update(group);
-            MusicGroupsDBContext.SaveChanges();
+            Group group = FindById(id);
+            if (group != null)
+            {
+                group.GroupName = name;
+                group.GroupGenre = genre;
+                MusicGroupsDBContext.Groups.Update(group);
+                MusicGroupsDBContext.SaveChanges();
+            }
         }
 
     }

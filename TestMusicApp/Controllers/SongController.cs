@@ -30,20 +30,31 @@ namespace TestMusicApp.Controllers
 
         public void CreateSong(Song song)
         {
-            MusicGroupsDBContext.Add(song);
-            MusicGroupsDBContext.SaveChanges();
+            if (song != null)
+            {
+                MusicGroupsDBContext.Add(song);
+                MusicGroupsDBContext.SaveChanges();
+            }
         }
 
         public void DeleteSong(Song song)
         {
-            MusicGroupsDBContext.Remove(song);
-            MusicGroupsDBContext.SaveChanges();
+            if (song != null)
+            {
+                MusicGroupsDBContext.Remove(song);
+                MusicGroupsDBContext.SaveChanges();
+            }
         }
 
-        public void UpdateSong(Song song)
+        public void UpdateSong(int id, string name, int groupId)
         {
-            MusicGroupsDBContext.Update(song);
-            MusicGroupsDBContext.SaveChanges();
+            Song song = FindById(id);
+            if (song != null) {
+                song.SongName = name;
+                song.SongGroupFk = groupId;
+                MusicGroupsDBContext.Songs.Update(song);
+                MusicGroupsDBContext.SaveChanges();
+            }
         }
 
         public IQueryable<Song> SongsByGroupName(string groupName) {
