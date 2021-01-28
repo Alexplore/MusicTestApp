@@ -13,8 +13,7 @@ namespace TestMusicApp
                 musicGroupsDBContext.Database.EnsureCreated();
 
                 Group group = new Group("Linkin Park", "Alternative rock");
-                musicGroupsDBContext.Groups.Add(group);
-                musicGroupsDBContext.SaveChanges();
+                
                 Song[] songs = new Song[5];
                 songs[0] = new Song("Castle of glass", 1);
                 //songs[0].Group = (Group)musicGroupsDBContext.Groups.Where(p => p.GroupId == songs[0].GroupId);
@@ -26,6 +25,7 @@ namespace TestMusicApp
                 //songs[3].Group = (Group)musicGroupsDBContext.Groups.Where(p => p.GroupId == songs[3].GroupId);
                 songs[4] = new Song("Breaking the habit", 1);
                 //songs[4].Group = (Group)musicGroupsDBContext.Groups.Where(p => p.GroupId == songs[4].GroupId);
+                musicGroupsDBContext.Groups.Add(group);
                 musicGroupsDBContext.Songs.AddRange(songs);
                 musicGroupsDBContext.SaveChanges();
             }

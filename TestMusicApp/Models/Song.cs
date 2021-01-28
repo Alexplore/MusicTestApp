@@ -14,9 +14,10 @@ namespace TestMusicApp
 
         public virtual Group Group { get; set; }
 
-        public Song(string SongName, int GroupId) {
+        public Song(string SongName, int GroupId, Group Group) {
             this.SongName = SongName;
             this.GroupId = GroupId;
+            this.Group = Group;
         }
     }
 }

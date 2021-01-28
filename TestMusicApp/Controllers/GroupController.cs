@@ -7,23 +7,40 @@ namespace TestMusicApp.Controllers
 {
     class GroupController
     {
-        MusicGroupsDBContext musicGroupsDBContext;
+        MusicGroupsDBContext MusicGroupsDBContext;
 
-        public GroupController(MusicGroupsDBContext musicGroupsDBContext) {
-            this.musicGroupsDBContext = musicGroupsDBContext;
+        public GroupController(MusicGroupsDBContext MusicGroupsDBContext) {
+            this.MusicGroupsDBContext = MusicGroupsDBContext;
         }
-        public Group FindById(int id)
+        public Group FindById(int Id)
         {
-            Group group = ((Group)(from groups in musicGroupsDBContext.Groups
-                           where groups.GroupId == id
+            Group Group = ((Group)(from groups in MusicGroupsDBContext.Groups
+                           where groups.GroupId == Id
                            select groups));
-            return  group;
+            return  Group;
         }
 
-        public IQueryable<Group> findAll()
+        public IQueryable<Group> ReadGroups()
         {
-            return (from groups in musicGroupsDBContext.Groups
+            return (from groups in MusicGroupsDBContext.Groups
                             select groups);
+        }
+
+        public void CreateGroup(Group Group) {
+            MusicGroupsDBContext.Add(Group);
+            MusicGroupsDBContext.SaveChanges();
+        }
+
+        public void DeleteGroup(Group Group)
+        {
+            MusicGroupsDBContext.Remove(Group);
+            MusicGroupsDBContext.SaveChanges();
+        }
+
+        public void UpdateGroup(Group Group)
+        {
+            MusicGroupsDBContext.Update(Group);
+            MusicGroupsDBContext.SaveChanges();
         }
 
     }
